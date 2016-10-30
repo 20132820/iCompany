@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMapNode url="/Areas/Systems" title="系统管理">
+  <siteMapNode url="/Areas/Systems/Admin" title="管理员">
+    <siteMapNode url="/Shared/Shared/View?viewName=/Areas/Systems/Views/Admin/List.cshtml" title="管理员管理" description="管理系统管理员信息" />
+  </siteMapNode>
+</siteMapNode>

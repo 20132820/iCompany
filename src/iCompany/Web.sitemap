@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMapNode url="" title="双子星管理平台">
+
+  <siteMapNode title="设计管理" siteMapFile="/Areas/Design/Web.sitemap" />
+  <siteMapNode title="系统管理" siteMapFile="/Areas/Systems/Web.sitemap" />
+
+</siteMapNode>

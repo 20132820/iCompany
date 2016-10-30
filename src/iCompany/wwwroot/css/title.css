@@ -1,0 +1,36 @@
+﻿#header {
+    text-align: left;
+    overflow: hidden;
+}
+
+#logo {
+    height: 64px;
+    width: 64px;
+    margin: 5px;
+    float: left;
+    background-size: cover;
+    z-index: 10;
+    position: relative;
+}
+
+#title {
+    text-indent: 80px;
+    font-size: 16pt;
+    font-weight: bold;
+    line-height: 75px;
+    position: relative;
+}
+
+#version {
+    vertical-align: super;
+    font: normal 9pt '宋体';
+    position: relative;
+}
+
+#header #logonState {
+    right: 10px;
+    top: 10px;
+    position: absolute;
+    vertical-align: super;
+    font: normal 9pt '宋体';
+}

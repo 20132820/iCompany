@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Areas/Shared/Views/Shared/_Title.cshtml";
+
+    if (this.Context.Session.GetString("OnlyWorkplace") == null)
+    {
+        <div id="menuLeft" data-options="region:'west',split:true">
+            <div id="menuAccordion"></div>
+        </div>
+    }
+}
+
+@section header{
+    <div id="menuTop">
+    </div>
+}
+
+<div id="contentPage" data-options="region:'center'">
+</div>
+
+@section head{
+    <script type="text/javascript">
+        $(function () {
+            if ('@this.Context.Session.GetString("ChangePassword")' == 'True') {
+                openDialog({
+                    title: '您的密钥已到期，请先修改密码',
+                    width: 500,
+                    height: 220,
+                    url: '@Url.Action("View","Administrator")',
+                    data: {
+                        viewName: 'ChangePassword',
+                        partial: true
+                    },
+                    closable: false
+                });
+            }
+
+            menuUrl = '@Url.Action("Index","Menu")';
+            currentPath = '@Context.Request.Path';
+            showMenuTop();
+        });
+    </script>
+}

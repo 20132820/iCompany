@@ -1,0 +1,62 @@
+﻿<form id="form" action='@Url.Action("Post", "Product", "Design")' method="post">
+    <table class="form" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>名称</th>
+            <td>
+                <input id="Name" name="Name" class="fill" />
+            </td>
+        </tr>
+        <tr>
+            <th>型号</th>
+            <td>
+                <input id="No" name="No" class="fill" />
+            </td>
+        </tr>
+    </table>
+    <div class="formButton">
+        <input type="button" id="btnSave" value="保存" />
+        <input type="hidden" id="Id" name="Id" />
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#Name").validatebox({
+            required: true
+        });
+        $("#No").validatebox({
+            required: true,
+        });
+
+        @*@if (Context.Request.Form != null)
+            {
+                var id = '@Context.Request.Form["id"]';
+                alert(id);
+                if (id != '') {
+            $.ajax({
+                        type: 'POST',
+                url: '@Url.Action("Get", "Product", "Design")',
+                data: {
+                            "DbQP_Id_=": id,
+                    'sort':'Name'
+                },
+                success: function(menu) {
+                    $('#Name').val(menu.rows[0].name);
+                    $('#No').val(menu.rows[0].no);
+                    $('#Id').val(id);
+                        },
+                error: handleError
+            });
+                }
+            }*@
+
+        $("#btnSave").click(function () {
+            if (validateForm()) {
+                $("#form").ajaxSubmit({
+                    success: closeAndReload,
+                    error: handleError
+                });
+            }
+            return false;
+        });
+    });
+</script>

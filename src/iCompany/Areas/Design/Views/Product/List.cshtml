@@ -1,0 +1,80 @@
+﻿<div id="toolbar">
+    <a id="btnNew" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">
+        新建
+    </a>
+    <a id="btnEdit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">
+        编辑
+    </a>
+    <a id="btnDelete" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">
+        删除
+    </a>
+</div>
+<table id="dg">
+    <thead>
+        <tr>
+            <th data-options="field:'ck',checkbox:true"></th>
+            <th data-options="field:'name',width:100,sortable:true">名称</th>
+            <th data-options="field:'no',width:100">型号</th>
+        </tr>
+    </thead>
+</table>
+<script type="text/javascript">
+    $(function () {
+        datagrid({
+            control: '#dg',
+            toolbar: '#toolbar',
+            url: '@Url.Action("Get", "Product", "Design")',
+            idField: 'id',
+            sortName: 'Name',
+            sortOrder: 'asc',
+            queryParams: {},
+            singleSelectOnlyButton: ['#btnEdit']
+        });
+
+        $("#btnNew").click(function () {
+            openDialog({
+                title: '新建产品',
+                width: 500,
+                height: 270,
+                url: '@Url.View("Edit", "Product", "Design", true)'
+            });
+        });
+
+        $("#btnEdit").click(function () {
+            var info = getSelectedId();
+            if (info) {
+                openDialog({
+                    title: '修改产品信息',
+                    width: 500,
+                    height: 360,
+                    url:  '@Html.Raw(Url.View("Edit", "Product", "Design", true))',
+                    data: {
+                        id: info.id
+                    }
+                });
+            }
+        });
+
+        $("#btnDelete").click(function () {
+            if (getSelect("#dg")) {
+                $.messager.confirm('提示', '删除选中产品?', function (result) {
+                    if (result) {
+                        var data = getDataGridIds(
+                            {
+                                controlId: '#dg',
+                                fieldName: 'Id',
+                                paramName: 'id'
+                            });
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("Delete")',
+                            data: data,
+                            success: reload,
+                            error: handleError
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>

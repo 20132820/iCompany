@@ -1,0 +1,8 @@
+{
+	"name": "iCompany",
+	"private": true,
+  "dependencies": {
+    "jquery-easyui-bower": "*",
+    "jquery-form": "*"
+  }
+}

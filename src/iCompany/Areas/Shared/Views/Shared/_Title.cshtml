@@ -1,0 +1,59 @@
+﻿@using Microsoft.Extensions.Options;
+@using iCompany.Areas.Shared.Models;
+
+@inject IOptions<VisualConfigs> VisualConfigs
+
+@{
+    Layout = "~/Areas/Shared/Views/Shared/_Layout.cshtml";
+}
+@section head{
+    @RenderSection("head", false)
+
+    <script type="text/javascript">
+        $(function () {
+            $('#btnChangePassword').click(function () {
+                openDialog({
+                    title: '修改密码',
+                    width: 500,
+                    height: 220,
+                    url: '@Url.Action("View","Administrator")',
+                    data: {
+                        viewName: 'ChangePassword',
+                        partial: true
+                    }
+                });
+            });
+        });
+    </script>
+}
+<body class="easyui-layout">
+    @if (this.Context.Session.GetString("OnlyWorkplace") == null)
+    {
+        <div id="header" data-options="region:'north',border:false">
+            <div id="logo">
+            </div>
+            <span id="title">@VisualConfigs.Value.Title</span>
+            <span id="version">v@(VisualConfigs.Value.Version.ToString(4))</span>
+            <span id="logonState">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span>你好，@this.Context.Session.GetString("UserDisplayName")</span>
+                    if (User.Identity.Name.ToLower() != "初始化管理员")
+                    {
+                        <a id="btnChangePassword" href="#">[修改密码]</a>
+                    }
+                    <a href='@Url.Action("Logoff", "Administrator")'>[注销]</a>
+                }
+                else
+                {
+                    <a href='@Url.Action("Logon", "Administrator")'>[管理员登录]</a>
+                }
+            </span>
+            @RenderSection("header", false)
+        </div>
+    }
+    @RenderBody()
+    <div id="dlg"></div>
+    <div id="loadingMask" class="datagrid-mask" style="z-index:10000"></div>
+    <div id="loadingMaskMsg" class="datagrid-mask-msg" style="left:50%; margin-left:-75px; z-index:10001;">正在处理，请稍后...</div>
+</body>

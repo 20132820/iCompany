@@ -1,0 +1,132 @@
+﻿<div id="toolbar">
+    <a id="btnNew" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">
+        新建
+    </a>
+    <a id="btnDelete" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">
+        删除
+    </a>
+    <a id="btnResetPwd" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">
+        重置密码
+    </a>
+    <a id="btnChangeRole" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">
+        设置角色
+    </a>
+</div>
+<table id="dg">
+    <thead>
+        <tr>
+            <th data-options="field:'ck',checkbox:true"></th>
+            <th data-options="field:'id',width:100">登录用户名</th>
+            <th data-options="field:'name',width:100,sortable:true">名称</th>
+            <th data-options="field:'role',width:100">角色</th>
+        </tr>
+    </thead>
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        datagrid({
+            control: '#dg',
+            toolbar: '#toolbar',
+            url: '@Url.Action("Get", "Admin", "Systems")',
+            idField: 'id',
+            sortName: 'Name',
+            sortOrder: 'asc',
+            queryParams: {
+                'DbQP_Role_=': '@this.Context.Session.GetString("Role")' == '初始化管理员' ? '系统管理员 [OR] 安全保密员 [OR] 审计员 [OR] <无角色>' : '业务操作员 [OR] <无角色>'
+            },
+            singleSelectOnlyButton: ['#btnChangeRole', '#btnCert']
+        });
+
+        if ('@this.Context.Session.GetString("Role")' == "安全保密员") {
+            $("#btnNew").css("display", "none");
+            $("#btnDelete").css("display", "none");
+        } else if ('@User.Identity.Name' != '初始化管理员') {
+            $("#btnChangeRole").css("display", "none");
+        }
+
+        $("#btnNew").click(function () {
+            openDialog({
+                title: '新建管理员',
+                width: 500,
+                height: 270,
+                url: '@Url.View("New", "Admin", "Systems", true)'
+            });
+        });
+
+        $("#btnCert").click(function () {
+            var row = getSelect("#dg");
+            if (row) {
+                openDialog({
+                    title: '管理员证书',
+                    width: 800,
+                    height: 500,
+                    url: '@Html.Raw(Url.Action("View", new { viewName = "Cert", partial = true }))',
+                    data: {
+                        id: row["Id"]
+                    }
+                });
+            }
+        });
+
+        $("#btnChangeRole").click(function () {
+            var row = getSelect("#dg");
+            if (row) {
+                openDialog({
+                    title: '设置角色',
+                    width: 500,
+                    height: 200,
+                    url: '@Html.Raw(Url.Action("View", new { viewName = "Role", partial = true }))',
+                    data: {
+                        id: row["Id"],
+                        oldRole: row["Role"]
+                    }
+                });
+            }
+        });
+
+        $("#btnResetPwd").click(function () {
+            if (getSelect("#dg")) {
+                $.messager.confirm('提示', '重置选中管理员密码?', function (result) {
+                    if (result) {
+                        var data = getDataGridIds(
+                            {
+                                controlId: '#dg',
+                                fieldName: 'Id',
+                                paramName: 'id'
+                            });
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("ResetPassword")',
+                            data: data,
+                            success: function () { $.messager.alert('提示', '重置成功，管理员当前密码为登录名', 'info'); },
+                            error: handleError
+                        });
+                    }
+                });
+            }
+        });
+
+        $("#btnDelete").click(function () {
+            if (getSelect("#dg")) {
+                $.messager.confirm('提示', '删除选中管理员?', function (result) {
+                    if (result) {
+                        var data = getDataGridIds(
+                            {
+                                controlId: '#dg',
+                                fieldName: 'Id',
+                                paramName: 'id'
+                            });
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("Delete")',
+                            data: data,
+                            success: reload,
+                            error: handleError
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>

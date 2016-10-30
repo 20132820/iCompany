@@ -1,0 +1,32 @@
+﻿a:hover {
+    color: #FFAB3F;
+}
+
+
+#header {
+    background-color: #E0ECFF;
+    color: #FF6400;
+}
+
+#logo {
+    background-image: url('logo-title.png');
+    background-repeat: no-repeat;
+}
+
+
+#menu .body:hover, #menu .bodySelected:hover {
+    color: #FFAB3F;
+}
+
+#menu .bodySelected {
+    color: #FFAB3F;
+}
+
+
+table.form th {
+    background-color: #E0ECFF;
+}
+
+#search {
+    background-color: #F4F4F4;
+}

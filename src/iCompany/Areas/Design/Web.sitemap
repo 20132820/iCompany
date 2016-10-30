@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMapNode url="/Areas/Design" title="设计管理">
+  <siteMapNode url="/Areas/Design/Product" title="产品管理">
+    <siteMapNode url="/Shared/Shared/View?viewName=/Areas/Design/Views/Product/List.cshtml" title="产品列表" description="" />
+    <siteMapNode url="/Shared/Shared/View?viewName=/Areas/Design/Views/Components/List.cshtml" title="零件列表" description="" />
+    <siteMapNode url="/Shared/Shared/View?viewName=/Areas/Design/Views/ProductComponents/List.cshtml" title="产品零件组成" description="" />
+  </siteMapNode>
+</siteMapNode>
