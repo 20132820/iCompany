@@ -1,0 +1,68 @@
+﻿#toolbar {
+    padding: 5px;
+}
+
+    #toolbar #right {
+        position: absolute;
+        right: 5px;
+    }
+
+table.form {
+    width: 98%;
+    margin: 5px;
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+    table.form caption {
+        margin-top: 20px;
+        font-size: 15pt;
+        font-weight: bold;
+    }
+
+    table.form th, table.form td {
+        border-right: 1px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+        padding: 3px;
+    }
+
+    table.form th {
+        width: 120px;
+        min-width: 120px;
+        text-align: center;
+        height: 30px;
+    }
+
+    table.form td {
+        text-align: left;
+        word-break: break-all;
+    }
+
+    table.form select {
+        width: 100%;
+    }
+
+    table.form .fill {
+        width: 98%;
+    }
+
+    table.form textarea {
+        width: 98%;
+    }
+
+.formButton {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.singleForm {
+    width: 60% !important;
+    min-width:400px;
+    margin: auto !important;
+}
+
+#search {
+    background-color: #F4F4F4;
+}

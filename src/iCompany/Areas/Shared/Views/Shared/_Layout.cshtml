@@ -1,0 +1,41 @@
+﻿@using Microsoft.Extensions.Options;
+@using iCompany.Areas.Shared.Models;
+
+@inject IOptions<VisualConfigs> VisualConfigs
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>@VisualConfigs.Value.Title</title>
+
+    <environment names="Development">
+        <script src="~/lib/jquery-easyui-bower/jquery.min.js"></script>
+        <script src="~/lib/jquery-easyui-bower/jquery.easyui.min.js"></script>
+        <script src="~/lib/jquery-easyui-bower/locale/easyui-lang-zh_CN.js"></script>
+        <script src="~/lib/jquery-form/jquery.form.js"></script>
+        <script src="~/js/common.js"></script>
+        <script src="~/js/menu.js"></script>
+        <script src="~/js/datagrid.js"></script>
+        <script src="~/js/dialog.js"></script>
+        <script src="~/js/form.js"></script>
+
+        <link rel="stylesheet" href="~/lib/jquery-easyui-bower/themes/color.css" />
+        <link rel="stylesheet" href="~/lib/jquery-easyui-bower/themes/icon.css" />
+        <link rel="stylesheet" href="~/lib/jquery-easyui-bower/themes/default/easyui.css" />
+        <link rel="stylesheet" href="~/css/layout.css" />
+        <link rel="stylesheet" href="~/css/title.css" />
+        <link rel="stylesheet" href="~/css/workplace.css" />
+        <link rel="stylesheet" href="~/css/menu.css" />
+        <link rel="stylesheet" href="~/css/themes/@VisualConfigs.Value.Theme/color.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/wwwroot/js/iCompany.min.js"></script>
+        <link rel="stylesheet" href="~/wwwroot/css/iCompany.min.css" />
+    </environment>
+
+    @RenderSection("head", false)
+</head>
+@RenderBody()
+</html>

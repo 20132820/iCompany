@@ -1,0 +1,7 @@
+﻿{
+  "DbConfigs": {
+    "Encrypt": "False",
+    "Type": "sqlite",
+    "ConnectionString": "Filename=./iCompany.db"
+  }
+}

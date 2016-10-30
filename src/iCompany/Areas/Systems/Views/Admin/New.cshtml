@@ -1,0 +1,61 @@
+﻿<form id="form" action='@Url.Action("Post", "Admin", "Systems")' method="post">
+    <table class="form" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>登录用户名</th>
+            <td>
+                <input id="Id" name="Id" class="fill" />
+            </td>
+        </tr>
+        <tr>
+            <th>密码</th>
+            <td>
+                <input id="Password" name="Password" type="password" class="fill" />
+            </td>
+        </tr>
+        <tr>
+            <th>确认密码</th>
+            <td>
+                <input id="PasswordConfirm" type="password" class="fill" />
+            </td>
+        </tr>
+        <tr>
+            <th>名称</th>
+            <td>
+                <input id="Name" name="Name" class="fill" />
+            </td>
+        </tr>
+    </table>
+    <div class="formButton">
+        <input type="button" id="btnSave" value="保存" />
+        <input type="hidden" name="Role" value="<无角色>" />
+    </div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#Id").validatebox({
+            required: true
+        });
+        $("#Password").validatebox({
+            required: true,
+            validType: 'password'
+        });
+        $("#PasswordConfirm").validatebox({
+            required: true,
+            validType: "equalTo['#Password']",
+            invalidMessage: "两次密码输入不一致"
+        });
+        $("#Name").validatebox({
+            required: true
+        });
+
+        $("#btnSave").click(function () {
+            if (validateForm()) {
+                $("#form").ajaxSubmit({
+                    success: closeAndReload,
+                    error: handleError
+                });
+            }
+            return false;
+        });
+    });
+</script>

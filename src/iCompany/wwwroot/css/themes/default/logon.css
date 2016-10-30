@@ -1,0 +1,67 @@
+﻿#logon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -345px;
+    margin-top: -128px;
+    width: 740px;
+}
+
+    #logon #systemName {
+        width: 240px;
+        font-size: 20pt;
+        font-weight: bold;
+        color: #04AEDA;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    #logon #logo {
+        background: url('logo-logon.png') no-repeat;
+        background-position: center 0px;
+        height: 250px;
+        width: 240px;
+    }
+
+    #logon #lineHor {
+        background: url('line.png') no-repeat;
+        height: 256px;
+        width: 1px;
+        position: absolute;
+        top: 0;
+        left: 260px;
+    }
+
+    #logon #key {
+        background: url('key.png') no-repeat;
+        font-size: 20pt;
+        font-weight: bold;
+        color: #04AEDA;
+        text-indent: 20px;
+        height: 31px;
+        position: absolute;
+        top: 10px;
+        left: 280px;
+    }
+
+    #logon #input {
+        position: absolute;
+        top: 50px;
+        left: 280px;
+        margin-left: 50px;
+        margin-top: 20px;
+    }
+
+    #logon #lock {
+        background: url('lock.png') no-repeat;
+        width: 70px;
+        height: 90px;
+        position: absolute;
+        top: 166px;
+        left: 600px;
+        z-index: 1;
+    }
+
+    #logon #errorInfo {
+        color: red;
+    }
